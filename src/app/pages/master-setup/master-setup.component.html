@@ -1,0 +1,72 @@
+<article>
+    <mat-toolbar color="primary">
+        <mat-icon (click)="sidenav.toggle()" style="cursor: pointer"> menu </mat-icon>
+        <div class="logo">
+            <span>JAGOTA</span>
+        </div>
+        <span class="mat-spacer"></span>
+        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+            <mat-icon>notifications</mat-icon>
+        </button>
+        <button mat-stroked-button class="example-icon login-button" aria-label="Example icon-button with person icon" (click)="onlogout()" >
+            <mat-icon>person</mat-icon>&nbsp; LogOut
+        </button>
+    </mat-toolbar>
+</article>
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav role="navigation" [opened]="screenWidth > 840" [mode]="screenWidth > 840 ? 'side' : 'over'">
+        <mat-nav-list>
+            <mat-list-item routerLink="/dashboard/dashboard" routerLinkActive="router-link-active">
+                <mat-icon>dashboard</mat-icon>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item routerLink="/dashboard/contacts" routerLinkActive="router-link-active">
+                <mat-icon>settings</mat-icon>
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <main class="main-content">
+            <div class="control__center-topsection">
+                <div fxLayout="row" fxLayoutAlign="space-around">
+                    <div fxFlex="50">
+                        <div class="control__center-buttons--group">
+                            <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+                                <mat-button-toggle [routerLink]="tab.route" routerLinkActive="active-link"
+                                    *ngFor="let tab of tabs">{{tab.tabName}}</mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </div>
+                    </div>
+                    <div fxFlex="50">
+                        <div class="flex__row">
+                            <div class="flex__column-1">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Choose a date</mat-label>
+                                    <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate"
+                                        (dateChange)="onDateChange()" />
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <div class="flex__column-2">
+                                <div class="logisitc__setup">
+                                    <label>Logistic Setup :</label>
+                                    <select name="setup" id="setup" [(ngModel)]="selectedLocation">
+                                        <option [value]="location.LOCATION_ID" *ngFor="let location of locationList">
+                                            {{location.LOC_SHORT_NAME_ENG}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <router-outlet></router-outlet>
+        </main>
+
+    </mat-sidenav-content>
+
+</mat-sidenav-container>

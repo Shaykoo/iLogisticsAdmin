@@ -1,0 +1,88 @@
+.mat-dialog-uploadcontracts {
+    .mat-dialog-container {
+        border-radius: 20px;
+    }
+}
+.uploadcontractModal {
+    width: 800px;
+   
+    &-header {
+        margin-bottom: 40px;
+        h4 {
+            font-size: 20px;
+        }
+    }
+    .row {
+        margin: 0 -10px;
+        display: flex;
+        .col {
+            padding: 0 10px;
+            flex: 1 1 auto;
+        }
+    }
+    .mat-primary {
+        min-width: 160px;
+        box-shadow: 0px 3px 6px #00000029;
+    }
+    .upload {
+        height: 140px;
+        .icon {
+            margin-bottom: 8px;
+        }
+        .icon-flie {
+            font-size: 50px;
+        }
+    }
+    .form-field {
+        margin-bottom: 15px;
+        .form-control {
+            background-color: var(--79);
+            transition: all 0.3s;
+            border: 1px solid var(--79);
+            padding: 6px 15px;
+            outline: none;
+            &:hover,
+            &:focus {
+                border-color: var(--325);
+            }
+            &:focus-visible {
+                outline: none;
+            }
+        }
+        .control-label {
+            display: inline-block;
+            &-desc {
+                border-radius: 10px 10px 0px 0px;
+                height: 40px;
+                padding: 9px 20px;
+            }
+        }
+        .desc {
+            textarea {
+                resize: none;
+                height: 100px;
+                width: 100%;
+                border-radius: 0px 0px 20px 20px;
+            }
+        }
+        .date {
+            height: 50px;
+            .control-label {
+                position: absolute;
+                left: 0px;
+                top: 0px;
+                height: 100%;
+                border-radius: 10px 0px 0px 10px;
+                width: 120px;
+                line-height: 50px;
+                text-align: center;
+            }
+            .form-control {
+                border-radius: 10px;
+                width: 100%;
+                height: 50px;
+                padding-left:130px;
+            }
+        }
+    }
+}

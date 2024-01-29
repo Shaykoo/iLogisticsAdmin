@@ -1,0 +1,93 @@
+.supplierContact {
+    .row {
+        margin: 0 -10px;
+        display: flex;
+        flex-wrap: wrap;
+        > .col {
+            padding: 0 10px;
+            &-left {
+                flex: 1;                
+            }
+            &-right {
+                flex: 0 0 420px;
+                @media (max-width: 1680px) {
+                    flex: 0 0 334px;
+                }
+                @media (max-width: 1399px) {
+                    flex: 0 0 100%;
+                    margin-top: 20px;
+                }
+            }
+        }
+    }
+    .innerRow {
+        margin: 0 -10px;
+        display: flex;
+        &-col {
+            padding: 0 10px;
+            &-left {
+                flex: 0 0 300px;
+                @media (max-width: 1680px) {
+                    flex: 0 0 223px;
+                }
+            }
+            &-right {
+                flex: 1 1 100%;
+            }
+        }
+    }
+    .box {
+        background: var(--76);
+        border-radius: 20px 20px 10px 10px;
+        .status {
+            .customSelect {
+                border: 2px solid var(--76);
+                width: 130px;
+                min-width: 0;
+                font-weight: 600;
+            }
+            .label {
+                margin-right: 5px;
+            }
+        }
+        .mat-table {
+            border-radius: 20px 20px 0px 0px;
+            overflow: hidden;
+            tr.mat-header-row {
+                height: 40px;
+            }
+            th.mat-header-cell:first-of-type,
+            td.mat-cell:first-of-type,
+            td.mat-footer-cell:first-of-type {
+                padding-left: 20px;
+                @media (max-width: 1599px) {
+                    padding-left: 12px;
+                }
+            }
+        }
+        &-header {
+            background-color: var(--306);
+            border-radius: 20px 20px 0px 0px;
+            padding: 8px 13px;
+            i {
+                font-size: 20px;
+            }
+        }
+        &-content {
+            padding: 20px 10px;
+            @media (max-width: 1399px) {
+                padding: 10px;
+            }
+        }
+        &-contract {
+            .mat-header-cell {
+                &-action {
+                    width: 135px;
+                    @media (max-width: 1399px) {
+                        width: 114px;
+                    }
+                }
+            }
+        }
+    }
+}

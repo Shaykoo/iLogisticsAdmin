@@ -1,0 +1,83 @@
+.routetasktype-page {
+    padding: 25px 35px;
+    background-color: #fefefe;
+    .box {
+        border-radius: 20px 20px 10px 10px;
+        max-width:1170px;
+        .mat-accent-custom {
+            height: 30px;
+            line-height: 30px;
+            padding: 0 11px;
+            .mat-icon {
+                font-size: 21px;
+            }
+        }       
+        .tableContainer {
+            height: 600px;
+            overflow: auto;
+            .mat-table {
+                @media (max-width: 1599px) {
+                    .mat-cell,
+                    .mat-footer-cell {
+                        font-size: 13px;
+                    }
+                }
+                .number-cell{
+                    width: 100px;
+                }
+                .route-cell{
+                    width: 180px;
+                }
+        
+                tr.mat-header-row {
+                    height: 45px;
+                }
+                .mat-header-cell {
+                    background-color: var(--495);
+                    font-size: 16px;
+                    font-weight: 600;
+                    color: var(--305);
+                    border-bottom: 0px;
+                    padding: 0 10px;
+                    @media (max-width: 1599px) {
+                        font-size: 13px;
+                    }
+                }
+                .mat-cell {
+                    padding: 0 10px;
+                    border-bottom: 0px;
+                }
+                th.mat-header-cell:first-of-type,
+                td.mat-cell:first-of-type,
+                td.mat-footer-cell:first-of-type {
+                    padding-left: 10px;
+                }
+                th.mat-header-cell:last-of-type,
+                td.mat-cell:last-of-type,
+                td.mat-footer-cell:last-of-type {
+                    padding-right: 10px;
+                }
+                tr.mat-row,
+                tr.mat-footer-row {
+                    height: 40px;
+                }
+                tr.mat-row {
+                    &:nth-child(odd) {
+                        background-color: var(--78);
+                    }
+                }
+            }
+        }
+        &-header {
+            background-color: var(--306);
+            border-radius: 20px 20px 0px 0px;
+            padding: 8px 20px;
+            i {
+                font-size: 20px;
+            }
+        }
+        &-content {
+            padding: 0;
+        }
+    }
+}

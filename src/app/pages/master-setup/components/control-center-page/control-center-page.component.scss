@@ -1,0 +1,124 @@
+.layout {
+    height: 60vh;
+}
+
+.control__center-statistics {
+    background-color: whitesmoke;
+    height: 100px;
+    margin: 10px;
+    margin-bottom: 35px;
+
+    .info__cards {
+        mat-card {
+            border-radius: 12px 12px 12px 12px;
+            height: 70px;
+            width: 244px;
+
+            h3 {
+                font-size: large;
+                font-weight: 600;
+            }
+
+            .card__content {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .mat-card-footer {
+                background-color: #d2d3d3;
+                padding: 10px;
+                border-bottom-left-radius: 12px;
+                border-bottom-right-radius: 12px;
+
+                .card__footer {
+                    .flex__row {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: center;
+                    }
+                }
+            }
+        }
+    }
+
+    .info__actions {
+        mat-card {
+            height: 70px;
+            .mat-card-footer {
+                padding: 20px;
+                background-color: #f1f3f6;
+            }
+
+            .mat-chip {
+                min-width: 115px;
+                justify-content: center;
+                border: 1px solid #d3d3d3;
+                background-color: #fff;
+                cursor: pointer;                
+                &-active {
+                    background-color: #45bc80;
+                    color: #fff;
+                    &:focus {
+                        color: #fff;
+                    }
+                }
+                @media (max-width: 1399px) {
+                    min-width: 102px;
+                }
+            }
+        }
+    }
+}
+
+.route__code-table--section {
+    .route__code-table--sectionbody {
+        padding: 20px;
+        padding-top: 0px;
+        .table {
+            width: 100%;
+            text-align: center;
+            border: 1px solid grey;
+
+            .table__header {
+                background-color: #ffaa00;
+                h4 {
+                    font-weight: 600;
+                }
+            }
+
+            .table__row {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                border-bottom: 1px solid grey;
+
+                .table__column-1 {
+                    width: 20%;
+                    border-right: 1px solid grey;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    img {
+                        width: 18px;
+                        height: 25px;
+                    }
+                }
+
+                .table__column-2 {
+                    width: 80%;
+                    cursor:pointer;
+                    .selected__routes-text {
+                        font-weight: 500;
+                        color:green;
+                    }
+                }
+            }
+
+            .table__row:last-child {
+                border-bottom: none;
+            }
+        }
+    }
+}

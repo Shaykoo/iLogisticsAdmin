@@ -1,0 +1,6 @@
+<router-outlet></router-outlet>
+<div class="pageLoader" *ngIf="isLoading | async" >
+    <div class="pageLoader_inner">
+        <mat-spinner [diameter]="40"></mat-spinner>
+    </div>
+</div>

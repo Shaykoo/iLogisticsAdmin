@@ -1,0 +1,60 @@
+<article>
+    <mat-toolbar color="primary">
+        <mat-icon (click)="sidenav.toggle()" style="cursor: pointer"> menu </mat-icon>
+        <div class="logo">
+            <span>JAGOTA</span>
+        </div>
+        <span class="mat-spacer"></span>
+        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+            <mat-icon>notifications</mat-icon>
+        </button>
+        <button mat-stroked-button class="example-icon login-button" aria-label="Example icon-button with person icon" (click)="onlogout()" >
+            <mat-icon>person</mat-icon>&nbsp; LogOut
+        </button>
+    </mat-toolbar>
+</article>
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav role="navigation" [opened]="screenWidth > 840" [mode]="screenWidth > 840 ? 'side' : 'over'">
+        <mat-nav-list>
+            <mat-list-item routerLink="/dashboard/dashboard" routerLinkActive="router-link-active">
+                <mat-icon class="text-50">dashboard</mat-icon>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item routerLink="/dashboard/contacts" routerLinkActive="router-link-active">
+                <mat-icon class="text-50">settings</mat-icon>
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <main class="main-content">
+            <div class="supplierModule">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="row-left">
+                                <label class="text-50 label fw-500">Logistic Setup</label>
+                                <select class="customSelect">
+                                    <option>Bangkok</option>
+                                    <option>Bangkok</option>
+                                </select>
+                            </div>
+                            <div class="row-right">
+                                <mat-button-toggle-group name="fontStyle" aria-label="Font Style" value="Suppliers">
+                                    <mat-button-toggle value="Suppliers" routerLink="/dashboard/supplier/contacts" routerLinkActive="router-link-active">Suppliers</mat-button-toggle>
+                                    <mat-button-toggle value="Truck" routerLink="/dashboard/truck-type">Truck Type</mat-button-toggle>
+                                    <mat-button-toggle value="Route" routerLink="/dashboard/route-task-type">Route Task Type</mat-button-toggle>
+                                    <mat-button-toggle value="Master">Route Master</mat-button-toggle>
+                                    <mat-button-toggle value="Setup">Customer Route Setup</mat-button-toggle>
+                                </mat-button-toggle-group>
+                            </div>
+                        </div>
+                    </div>
+                    <router-outlet></router-outlet>
+                </div>
+            </div>            
+        </main>
+
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,78 @@
+<section>
+    <div class="container py-3">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="logo">
+                    <h5 class="m-0 p-0">Logilite</h5>
+                </div>
+            </div>
+            <div class="col-md-6 text-right">
+                <div class="logo-right ">
+                    <h4 class="m-0 p-0">JAGOTA</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="login bg-light">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 text-center form-center">
+              <div class="login-form">
+                  <form >
+                    <div class="container h-100">
+                        <div class="d-flex justify-content-center h-100">
+                            <div class="user_card">
+                                <div class="logo-position">
+                                    <div class="brand_logo_container">
+                                        <i class="fa fa-truck brand_logo" ></i>
+                                        <!-- <img src="https://cdn.freebiesupply.com/logos/large/2x/pinterest-circle-logo-png-transparent.png" class="brand_logo" alt="Logo"> -->
+                                    </div>
+                                </div>
+                                <div class="px-5">
+                                    <form class="login-input" [formGroup]="loginForm" (ngSubmit)="onUserAuthenticate()">
+                                        <h4 class="pb-2"> Log in </h4>
+
+                                        <div class="input-group">
+                                                 <input type="text" 
+                                                        class="form-control" 
+                                                        formControlName="username" 
+                                                        placeholder="Enter Username"
+                                                        [ngClass] = "{'border-red' : isFieldValid('username')}"
+                                                        >
+                                                 <small class="border-red" *ngIf="isFieldValid('username')">
+                                                    Username is <strong>required</strong>     
+                                                 </small>                                          
+                                        </div>
+                                        <div class="input-group">
+                                                <input class="form-control" 
+                                                       [type]="hide ? 'password' : 'text'" 
+                                                       formControlName="password" 
+                                                       placeholder="Password"
+                                                       [ngClass] = "{'border-red' : isFieldValid('password')}">
+                                                <small  class="border-red"  *ngIf="isFieldValid('password')">
+                                                    Password is <strong>required</strong>
+                                                </small>                                       
+                                            </div>
+                                        <!-- <div class="input-group">
+                                            <select class="form-control">
+                                                <option value=""> Select Warehouse </option>
+                                            </select>
+                                        </div> -->
+                                        <div class="input-group mt-4">
+                                            <button class="btn btn-warning text-white w-100"> Login </button>
+                                        </div>
+                                       </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </form>
+              </div>
+            </div>
+            <div class="col-md-6 px-0 bg-imag" style=" background-image: url(assets/images/login.jpeg);">
+                &nbsp;
+            </div>
+        </div>
+    </div>
+</section>

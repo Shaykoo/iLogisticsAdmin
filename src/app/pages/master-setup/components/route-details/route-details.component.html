@@ -1,0 +1,199 @@
+<main class="routesDetail">
+    <div fxLayout="row" class="routesDetail_top" fxLayoutAlign="space-around none">
+        <div class="overlay" id="overLay" *ngIf="showOverlay"></div>
+        <div class="routesDetail__left" fxFlex="30">
+            <header class="routesDetail__left-header">
+                <mat-form-field appearance="fill">
+                    <input matInput [(ngModel)]="searchTerm" (ngModelChange)="searchForRoutes($event)">
+                    <mat-icon matPrefix>search</mat-icon>
+                </mat-form-field>
+                <button mat-raised-button color="accent" (click)="searchWithKeywords()">Search</button>
+            </header>
+            <div class="routeTable">
+                <table mat-table  [dataSource]="routeData" matSort>
+                    <ng-container matColumnDef="select">
+                        <th mat-header-cell *matHeaderCellDef> </th>
+                        <td mat-cell *matCellDef="let row">
+                            <mat-checkbox (click)="$event.stopPropagation()"
+                                (change)="$event ? selectedRoute(row) : null" [checked]="selection.isSelected(row)">
+                            </mat-checkbox>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="routeCode">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Route Code </th>
+                        <td mat-cell *matCellDef="let element"> {{element.routeCode}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="cust">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Cust </th>
+                        <td mat-cell *matCellDef="let element"> {{element.cust}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="start">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Start </th>
+                        <td mat-cell *matCellDef="let element"> {{element.start}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="finish">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Finish </th>
+                        <td mat-cell *matCellDef="let element"> {{element.finish}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="issue">
+                        <th mat-header-cell *matHeaderCellDef> Issues </th>
+                        <td mat-cell *matCellDef="let element"> {{element.issue}} </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="routeDataColumns; sticky: true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: routeDataColumns;" (click)="selection.toggle(row)"
+                        [ngClass]="{ 'mat-row-selected': selection.isSelected(row)}">
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="routesDetail__right" fxFlex="70">
+            <div class="map">
+                <google-map #map height="100%" width="100%">
+                    <map-marker #markerMap="mapMarker" *ngFor="let marker of allMarker;  let i = index"
+                        [position]="{lat: +marker.lat, lng: +marker.lng}" [options]="getMarkerStyle(marker, i)"
+                        (mapClick)="openInfoWindow(markerMap, marker)">
+                    </map-marker>
+                    <map-info-window>
+                        <div class="marker-info-window">
+                            <b>{{ selectedMarkerCustomer }}</b>
+                            <br />
+                            <p>{{ selectedMarkerDelivery }}</p>
+                        </div>
+                    </map-info-window>
+                </google-map>
+                <div class="map-sequence">
+                    <div class="map-sequence-top">
+                        <mat-list>
+                            <mat-list-item>{{currentRoute}}</mat-list-item>
+                        </mat-list>
+                        <mat-list class="routesequencing">
+                            <mat-list-item>
+                                <span class="status" [style.backgroundColor]="selectedRouteData?.start=== 'Y' && selectedRouteData?.finish=== 'Y' ? '#45bc7f' : 'red' "></span>
+                                Route Sequencing
+                            </mat-list-item>
+                        </mat-list>
+                    </div>
+                    <div class="map-sequence-middle">
+                        <mat-list>
+                            <mat-list-item>Invoice Scanning <br />
+                                {{routeSequence?.invoiceScanned}}/{{routeSequence?.invoiceScanning}}</mat-list-item>
+                            <mat-list-item>Delivering Scanning
+                                <br />{{routeSequence?.deliveryScanned}}/{{routeSequence?.deliveryScanning}}
+                            </mat-list-item>
+                            <mat-list-item>Box Scanning
+                                <br />{{routeSequence?.boxScanned}}/{{routeSequence?.boxScanning}}
+                            </mat-list-item>
+                            <mat-list-item>Issues Complain <br /> 0/0</mat-list-item>
+                        </mat-list>
+                    </div>
+                    <div class="map-sequence-bottom">
+                        <mat-list>
+                            <mat-list-item>
+                                <span class="status" [style.backgroundColor]="selectedRouteData?.start=== 'Y' && selectedRouteData?.finish=== 'Y' ? '#45bc7f' : '#ffa000' "></span> 
+                                {{selectedRouteData?.start=== 'Y' && selectedRouteData?.finish=== 'Y' ? 'Completed' : 'Yet to Deliver'}}
+                             </mat-list-item>
+                        </mat-list>
+                    </div>
+                </div>
+            </div>
+            <app-proof-delivery [deliveryData]="proofDeliveryData" [totalData]="totalDeliveryBox" (closeModalEmitter)="closeModal()"></app-proof-delivery>
+        </div>
+    </div>
+    <div class="routesDetail__routeInfo">
+        <mat-card>
+            <mat-card-header fxLayout="row" fxLayoutAlign="none center">
+                <mat-card-title>Selected Routes :</mat-card-title>
+                <mat-chip-list>
+                    <mat-chip [color]="currentRoute === route.routeCode ? 'accent' : ''"
+                        *ngFor="let route of selection.selected" (click)="selectRouteForDetails(route)">
+                        {{route.routeCode}}</mat-chip>
+                </mat-chip-list>
+                <button mat-raised-button color="accent" *ngIf="selection.selected.length > 0"
+                    (click)="clearAll()">Clear All</button>
+            </mat-card-header>
+
+            <mat-card-content>
+                <div class="mat-card-content-header">
+                    <mat-list>
+                        <mat-list-item> Route : {{routeInfo?.ROUTE_CODE}} </mat-list-item>
+                        <mat-list-item> Route Name : {{routeInfo?.ROUTE_NAME}} </mat-list-item>
+                        <mat-list-item class="mat-list-item-driver"> Driver : {{routeInfo?.DELIVER_NAME}} <span
+                                class="status"></span></mat-list-item>
+                        <mat-list-item> Phone Number : {{routeInfo?.TEL}} </mat-list-item>
+                        <mat-list-item> Supplier Name : {{routeInfo?.SUPPLIER_NAME}} </mat-list-item>
+                        <mat-list-item *ngIf="selectedRouteData?.routeCode">
+                            Status: <span class="status" [style.backgroundColor]="selectedRouteData?.start=== 'Y' && selectedRouteData?.finish=== 'Y' ? '#45bc7f' : '#ffa000' "></span> 
+                            {{selectedRouteData?.start=== 'Y' && selectedRouteData?.finish=== 'Y' ? 'Completed' : 'Yet to Deliver'}}
+                         </mat-list-item>
+                    </mat-list>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="routesDetail_liveStatusTable">
+        <table mat-table [dataSource]="customerData" *ngIf="customerData.data.length > 0">
+            <ng-container matColumnDef="liveStatus">
+                <th mat-header-cell *matHeaderCellDef> Live Status </th>
+                <td mat-cell *matCellDef="let element">
+                    <div class="status" [class.status-completed]="element.liveStatus === 'Completed'">{{element.liveStatus}} </div>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="deliverySequence">
+                <th mat-header-cell *matHeaderCellDef> Delivery <br/> Sequencing </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.deliverySequence}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="branchName">
+                <th mat-header-cell *matHeaderCellDef> Branch Name </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.branchName}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="customerCode">
+                <th mat-header-cell *matHeaderCellDef> Customer Code </th>
+                <td mat-cell *matCellDef="let element"> {{element.customerCode}} </td>
+            </ng-container>
+            <ng-container matColumnDef="customerName">
+                <th mat-header-cell *matHeaderCellDef> Customer </th>
+                <td mat-cell *matCellDef="let element"> {{element.customerName}} </td>
+            </ng-container>
+            <ng-container matColumnDef="scheduleAt">
+                <th mat-header-cell *matHeaderCellDef> Schedule at </th>
+                <td mat-cell *matCellDef="let element"> {{element.scheduleAt}} </td>
+            </ng-container>
+            <ng-container matColumnDef="checkIn">
+                <th mat-header-cell *matHeaderCellDef> Check in </th>
+                <td mat-cell *matCellDef="let element"> {{element.checkIn | date:'shortTime'}} </td>
+            </ng-container>
+            <ng-container matColumnDef="checkOut">
+                <th mat-header-cell *matHeaderCellDef> Check out </th>
+                <td mat-cell *matCellDef="let element"> {{element.checkOut | date:'shortTime'}} </td>
+            </ng-container>
+            <ng-container matColumnDef="duration">
+                <th mat-header-cell *matHeaderCellDef> Duration </th>
+                <td mat-cell *matCellDef="let element"> {{element | duration}} </td>
+            </ng-container>
+            <ng-container matColumnDef="location">
+                <th mat-header-cell *matHeaderCellDef> Location </th>
+                <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+            </ng-container>
+            <ng-container matColumnDef="delivery">
+                <th mat-header-cell *matHeaderCellDef> Proof of delivery </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-list *ngIf="element.liveStatus === 'Completed'">
+                        <mat-list-item><span class="material-icons"
+                                >create</span></mat-list-item>
+                        <mat-list-item><span class="material-icons"
+                                >collections</span></mat-list-item>
+                        <mat-list-item><span class="material-icons">receipt_long</span>
+                        </mat-list-item>
+                    </mat-list>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="customerDataColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: customerDataColumns;" (click)="getRecord(row)"></tr>
+        </table>
+    </div>
+</main>

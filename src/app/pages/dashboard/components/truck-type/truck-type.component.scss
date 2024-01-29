@@ -1,0 +1,62 @@
+.trucktype-page {
+    padding: 25px 35px;
+    background-color: #fefefe;
+    .box {
+        border-radius: 20px 20px 10px 10px;
+        .mat-accent-custom{
+            height:30px;
+            line-height: 30px;
+            padding: 0 11px;
+            .mat-icon{
+                font-size: 21px;
+            }
+        }
+        .mat-warn-custom{
+            height:30px;
+            line-height: 30px;
+            margin-right:100px;
+           
+        }
+        .tableContainer {
+            max-width: 100%;
+            overflow: auto;
+            .w-60{
+                width:60px;
+            }
+            .w-30{
+                width:20px;
+            }
+            td,
+            th {
+                padding: 10px 11px;
+            }
+            th {
+                font-weight: 500;
+                background-color: var(--495);
+            }
+            table {
+                border-collapse: collapse;
+                background-color: #fff;
+                font-size: 15px;
+            }
+            tbody {
+                tr {
+                    &:nth-child(odd) {
+                        background-color: var(--78);
+                    }
+                }
+            }
+        }
+        &-header {
+            background-color: var(--306);
+            border-radius: 20px 20px 0px 0px;
+            padding: 8px 20px;
+            i {
+                font-size: 20px;
+            }
+        }
+        &-content {
+            padding: 0;
+        }
+    }
+}

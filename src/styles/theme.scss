@@ -1,0 +1,17 @@
+// @import "~source-sans-pro/source-sans-pro.css";
+@import "~material-design-icons/iconfont/material-icons.css";
+@import "~@angular/material/theming";
+// @import "~font-awesome/css/font-awesome.min.css";
+@include mat-core();
+
+$primary: mat-palette($mat-amber, 700, 300, 300);
+$accent: mat-palette($mat-pink, 700, 100, 900);
+$warn: mat-palette($mat-red, 700, 500, 900);
+$theme: mat-light-theme($primary, $accent, $warn);
+@include angular-material-theme($theme);
+
+$custom-typography: mat-typography-config(
+    $font-family: "Poppins, sans-serif",
+);
+
+@include angular-material-typography($custom-typography);

@@ -1,0 +1,100 @@
+<div class="proofdeliveryBox" id="proofdeliveryBox">
+    <div class="proofdeliveryBox-header">
+        <mat-icon (click)="closeModal()">clear</mat-icon> 
+        <div class="proofText">Proof of delivery</div>
+        <div class="customerDetail">
+            <div class="customerDetail_left">
+                <p>
+                    <label>Customer Name:</label>
+                    <span>{{deliveryData?.customerName}}</span>
+                </p>
+                <p>
+                    <label>Customer Code:</label>
+                    <span>{{deliveryData?.customerCode}}</span>
+                </p>
+                <div class="delivery">
+                    <div class="label">
+                        <img src="../../../../../assets/truck.svg" /> {{ deliveryData?.liveStatus === 'Completed'? 'Delivered':'Out for Delivery'}}
+                    </div>
+                    <div class="tag" *ngIf="deliveryData?.isCashCustomer === 'Y'">CASH</div>
+                </div>
+            </div>
+            <div class="customerDetail_right text-290">
+                <p class="fw-500"><span>Branch :</span> {{deliveryData?.branchName}}</p>
+                <p class="mb-0"><span class="fw-500">Delivery Address :</span><br /> {{deliveryData?.location}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="proofdeliveryBox-content">
+        <div class="box" *ngFor = "let deliveryBox of totalData;let index = index">
+            <div class="box_left">
+                <div class="proofdeliveryNumber"><span>{{index + 1}}</span> {{deliveryBox?.completeInVoiceNo}}</div>
+                <div class="taglist">
+                    <div class="taglist-item taglist-item-active" *ngFor="let box of deliveryBox.boxes">
+                        Box {{box}}
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="box_middle">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Products :</th>
+                            <th></th>
+                            <th>Price :</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor = "let product of deliveryBox?.products;let i = index">
+                            <td>
+                                <span class="count">{{i+1}}</span>
+                            </td>
+                            <td>
+                                <div class="name">{{product?.productName}}</div>
+                            </td>
+                            <td>{{product?.qty}} {{product?.unit}}</td>
+                           
+                            <td>{{product?.subTotal}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th>Total :</th>
+                            <th></th>
+                            <th>{{deliveryBox?.total}}</th>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div class="remarks">
+                    Remarks:
+                </div>
+            </div>
+            <div class="box_right">
+                <div class="inner">
+                    <div class="mainImage" *ngIf="deliveryBox?.photo">
+                        <img [src]="deliveryBox?.photo" (click)="changeImageWithClick('photo','signature',deliveryBox)"/>
+                        <div>{{photoText}}</div>
+                    </div>
+                    <div class="thumb">
+                        <div class="thumb-item" *ngIf="deliveryBox?.signature">
+                            <img [src]="deliveryBox?.signature" (click)="changeImageWithClick('signature','photo',deliveryBox)"/>
+                            <div>{{signatureText}}</div>
+                        </div>
+                        <div class="thumb-item" *ngIf="deliveryBox?.paySlip">
+                            <img [src]="deliveryBox?.paySlip" />
+                            <div>PaySlip</div>
+                        </div>
+                        <div class="thumb-item" *ngIf="deliveryBox?.audio">
+                            <img [src]="deliveryBox?.audio" />
+                            <div>Audio</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>

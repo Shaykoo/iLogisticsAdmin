@@ -1,0 +1,172 @@
+<div class="supplierContact">
+    <div class="row mb-30">
+        <div class="col col-left">
+            <div class="box h-100">
+                <div class="box-header text-50">
+                    <h4 class="d-flex align-center"><i class="icon-contract text-505 me-10"
+                            aria-hidden="true"></i> Contacts</h4>
+                </div>
+                <div class="box-content">
+                    <div class="innerRow">
+                        <div class="innerRow-col innerRow-col-left">
+                            <table mat-table [dataSource]="contactSource"
+                                class="mat-elevation-z0 w-100">
+                                <ng-container matColumnDef="name">
+                                    <th mat-header-cell *matHeaderCellDef
+                                        class="text-center">
+                                        Contact Name </th>
+                                    <td mat-cell *matCellDef="let element" class="fw-500">
+                                        {{element.name}}
+                                    </td>
+                                </ng-container>
+                                <tr mat-header-row *matHeaderRowDef="contactdata"></tr>
+                                <tr mat-row *matRowDef="let row; columns: contactdata;">
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="innerRow-col innerRow-col-right">
+                            <div class="d-flex justify-end align-center gap-h-20 mb-20">
+                                <div class="edit cursor-pointer lh-n h-20">
+                                    <i class="fa fa-pencil-square-o fs-20"
+                                        aria-hidden="true"></i>
+                                </div>
+                                <button mat-raised-button
+                                    class="mat-accent-custom mat-elevation-z0 rounded-20"
+                                    color="accent">
+                                    <mat-icon>add_circle</mat-icon> Add new contact
+                                </button>
+                            </div>
+                            <div class="userInfo">
+                                <table class="w-100">
+                                    <tbody>
+                                        <tr>
+                                            <th>Contact Name</th>
+                                            <td>Mr Supachoke</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Position</th>
+                                            <td>Director</td>
+                                        </tr>
+                                        <tr>
+                                            <th>E-mail</th>
+                                            <td>Supachoke@YuTransport.com</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Tel</th>
+                                            <td>08-856-3857 , 02-487-3879</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Fax</th>
+                                            <td>02-487-3879</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Remarks</th>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-right">
+            <div class="box box-weblogin h-100">
+                <div class="box-header text-50">
+                    <h4>Web Login</h4>
+                </div>
+                <div class="box-content">
+                    <table mat-table [dataSource]="logindataSource"
+                        class="mat-elevation-z0 w-100">
+                        <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef> Username </th>
+                            <td mat-cell *matCellDef="let element" class="fw-500">
+                                {{element.name}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="phone">
+                            <th mat-header-cell *matHeaderCellDef class="text-center"> Phone
+                                Number </th>
+                            <td mat-cell *matCellDef="let element"
+                                class="text-center fw-500">
+                                {{element.phone}} </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayelogindata"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayelogindata;"></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box box-contract">
+        <div class="box-header text-50 d-flex align-center justify-between">
+            <h4 class="d-flex align-center">
+                <i class="icon-file-edit text-505 me-10" aria-hidden="true"></i> Contracts
+            </h4>
+            <div class="status">
+                <label class="label fw-500">Status:</label>
+                <select class="customSelect">
+                    <option>All</option>
+                    <option>All</option>
+                </select>
+            </div>
+        </div>
+        <div class="box-content">
+            <div class="d-flex justify-end align-center gap-h-20 mb-15">
+                <div class="edit cursor-pointer lh-n h-20" (click)="uploadcontractDialog()">
+                    <i class="fa fa-pencil-square-o fs-20" aria-hidden="true"></i>
+                </div>
+                <button mat-raised-button
+                    class="mat-accent-custom mat-elevation-z0 rounded-20" color="accent"
+                    (click)="uploadfilesDialog()">
+                    <mat-icon>add_circle</mat-icon> Upload Contract
+                </button>
+            </div>
+            <table mat-table [dataSource]="contractdataSource"
+                class="mat-elevation-z0 w-100 rounded-0">
+                <ng-container matColumnDef="seq">
+                    <th mat-header-cell *matHeaderCellDef> Seq </th>
+                    <td mat-cell *matCellDef="let element" class="fw-500">
+                        {{element.seq}} </td>
+                </ng-container>
+                <ng-container matColumnDef="desc">
+                    <th mat-header-cell *matHeaderCellDef> Description </th>
+                    <td mat-cell *matCellDef="let element" class="fw-500">
+                        {{element.desc}} </td>
+                </ng-container>
+                <ng-container matColumnDef="startdate">
+                    <th mat-header-cell *matHeaderCellDef class="bg-77"> Start Date </th>
+                    <td mat-cell *matCellDef="let element" class="fw-500">
+                        {{element.desc}} </td>
+                </ng-container>
+                <ng-container matColumnDef="enddate">
+                    <th mat-header-cell *matHeaderCellDef class="bg-77"> End Date </th>
+                    <td mat-cell *matCellDef="let element" class="fw-500">
+                        {{element.enddate}} </td>
+                </ng-container>
+                <ng-container matColumnDef="files">
+                    <th mat-header-cell *matHeaderCellDef class="bg-77"> Files </th>
+                    <td mat-cell *matCellDef="let element" class="fw-500">
+                        {{element.files}} </td>
+                </ng-container>
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef
+                        class="mat-header-cell-action bg-77"> </th>
+                    <td mat-cell *matCellDef="let element" class="fw-500">
+                        <div class="d-inline-flex actions">
+                            <div class="icon cursor-pointer"><i
+                                    class="icon-paperclip-solid"></i></div>
+                            <div class="icon cursor-pointer"><i class="icon-trash"></i>
+                            </div>
+                            <div class="icon cursor-pointer"><i class="icon-eye-solid"></i>
+                            </div>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="contractdata"></tr>
+                <tr mat-row *matRowDef="let row; columns: contractdata;"></tr>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,146 @@
+<main class="driverDetail">
+  <div class="mainRow">
+    <div class="driverDetail__left" [class.driverDetail__left-expand]="showrightMap===true">
+      <div class="total">
+        <div class="total-item"><span class="text">Drivers</span> <span class="count">{{totalDriver}}</span></div>
+        <div class="total-item"><span class="text">Routes</span> <span class="count">{{totalRoute}}</span></div>
+      </div>
+      <div class="tablediv">
+        <table mat-table [dataSource]="dataSource" matSort>         
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element">
+              <div class="status status-completed">{{element.name}} </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="phoneNumber">
+            <th mat-header-cell *matHeaderCellDef> Phone Number </th>
+            <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
+          </ng-container>
+          <ng-container matColumnDef="routeCode">
+            <th mat-header-cell *matHeaderCellDef  mat-sort-header> Route Code </th>
+            <td mat-cell *matCellDef="let element"> {{element.routeCode}} </td>
+          </ng-container>
+          <ng-container matColumnDef="otp">
+            <th mat-header-cell *matHeaderCellDef> OTP </th>
+            <td mat-cell *matCellDef="let element"> 
+              {{element.otp}}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="routePlanning">
+            <th mat-header-cell *matHeaderCellDef> Route<br/> Planing </th>
+            <td mat-cell *matCellDef="let element"> 
+              <em class="text-600" [ngClass]="element.routePlanning === 'Y' ? 'icon-checkmark':'icon-close'"></em>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="invoiceScan">
+            <th mat-header-cell *matHeaderCellDef> Invoice<br/> Scan </th>
+            <td mat-cell *matCellDef="let element"> 
+              <em class="text-600" [ngClass]="element.invoiceScan === 'Y' ? 'icon-checkmark':'icon-close'"></em> 
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="documentScan">
+            <th mat-header-cell *matHeaderCellDef> Product<br/> Scan </th>
+            <td mat-cell *matCellDef="let element"> </td>
+          </ng-container>
+          <ng-container matColumnDef="delivery" >
+            <th mat-sort-header  mat-header-cell *matHeaderCellDef> Delivery </th>
+            <td mat-cell *matCellDef="let element"> 
+              <em class="text-600" [ngClass]="element.delivery === 'Y' ? 'icon-checkmark':'icon-close'"></em> 
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="tracking">
+            <th mat-header-cell *matHeaderCellDef> Tracking </th>
+            <td mat-cell *matCellDef="let element"><em class="icon-location text-600"></em></td>
+          </ng-container>
+          <ng-container matColumnDef="report">
+            <th mat-header-cell *matHeaderCellDef> Report </th>
+            <td mat-cell *matCellDef="let element"> <em class="icon-file-text2 text-295"></em> </td>
+          </ng-container>
+
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getMap(row)"></tr>
+        </table>
+      </div>
+    </div>
+    <div class="driverDetail__right" [class.driverDetail__right-expand]="showrightMap===true">
+      <mat-icon (click)="closeMap()">clear</mat-icon> 
+      <div class="map">
+        <div class="map-inner">
+          <google-map #map height="100%" width="100%">
+            <map-marker #markerMap="mapMarker" *ngFor="let marker of allMarker;  let i = index"
+                        [position]="{lat: +marker.lat, lng: +marker.lng}" [options]="getMarkerStyle(marker, i)"
+                        (mapClick)="openInfoWindow(markerMap, marker)">
+                    </map-marker>
+                    <map-info-window>
+                        <div class="marker-info-window">
+                            <b>{{ selectedMarkerCustomer }}</b>
+                            <br />
+                            <p>{{ selectedMarkerDelivery }}</p>
+                        </div>
+                    </map-info-window>
+          </google-map>
+        </div>
+        <div class="routeInfo">
+          <div class="row">
+            <div class="col">
+              <h1 class="text-300 fw-600">Route : {{selectedRow?.routeCode}}</h1>
+              <div class="total">
+                <!-- <div class="total-item"><span class="text">Drivers</span> <span class="count">{{totalDriver}}</span></div> -->
+                <div class="total-item"><span class="text">Customers</span> <span class="count">{{customerList?.length}}</span></div>
+              </div>
+            </div>
+            <div class="col">
+              <h3 class="text-300 fw-600 mb-0">Drivers:</h3>
+              <ul class="list-unstyled mb-0">
+                <li>
+                  <div class="status status-completed">{{selectedRow?.name}}</div>
+                </li>
+                <!-- <li>
+                  <div class="status status-completed">Somchai Peerapong</div>
+                </li>
+                <li>
+                  <div class="status status-pending">Somchai Peerapong</div>
+                </li> -->
+              </ul>
+            </div>
+            <div class="col">
+              <h3 class="text-300 fw-600 mb-0">Phone Number:</h3>
+              <ul class="list-unstyled mb-0">
+                <li>
+                  {{selectedRow?.phoneNumber}}
+                </li>
+               
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="addressbox">
+        <div class="row">
+          <div class="col col-left position-relative">
+            <div class="count bg-500 rounded-circle">{{currentIndex + 1}}</div>
+            <h4 class="fw-500">{{currentCustomer?.ROUTE_CODE}} : {{currentCustomer?.CUST_NAME}}</h4>
+            <h3 class="invoice">Invoices : {{currentIndex + 1}}</h3>
+            <h5>Branch : Head Office</h5>
+            <p><span class="fw-500">Delivery Address :</span><br /> {{currentCustomer?.LOCATION}}</p>
+          </div>
+          <div class="col col-right">
+            <div class="tag" *ngIf="currentCustomer?.CASH_CUSTOMER==='Y'">CASH</div>
+            <h5>Delivery Time : 09:00</h5>
+            <p><span class="fw-500">Remarks :</span><br /> </p>
+          </div>
+        </div>
+      </div>
+      <div class="customerlist">
+        <label class="d-inline-block fw-600 bg-500 label">Customers List</label>
+        <div class="customerlist-inner">
+          <ul>
+            <li [class.active]="currentIndex === index" *ngFor="let list of customerList;let index=index" (click)="selectCustomerData(index)">{{list}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

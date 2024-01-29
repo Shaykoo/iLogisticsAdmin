@@ -1,0 +1,21 @@
+
+html,
+body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    scroll-behavior: smooth;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    background-color:var(--76);
+    line-height:1.5;
+    @media (max-width:1599px) {
+        font-size:14px
+    }
+}
+
+@import "./styles/variables.scss";
+@import "./styles/iconmoon.scss";
+@import "./styles/theme.scss";
+@import "./styles/mat-custom.scss";
+@import "./styles/utility.scss";

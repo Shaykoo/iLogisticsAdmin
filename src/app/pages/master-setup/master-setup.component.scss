@@ -1,0 +1,110 @@
+mat-sidenav {
+    width: 60px;
+    background-color: #666666;
+}
+
+mat-sidenav-container,
+mat-sidenav-content,
+mat-sidenav {
+    height: 100vh;
+}
+
+.mat-nav-list {
+    margin-top: 60px;
+}
+.login-button{
+    margin-inline-end:20px;
+}
+
+mat-toolbar {
+    position: fixed;
+    z-index: 999;
+    top: 0px;
+}
+
+.logo {
+    height: 34px !important;
+    object-fit: contain;
+    padding-left: 20px;
+    outline: none;
+}
+
+.main-content {
+    // overflow-y: auto;
+    //height: 100vh;
+    margin-top: 64px;
+}
+
+.router-link-active {
+    border-left: crimson 4px solid;
+}
+.active-link {
+    background: #4285F4 0% 0% no-repeat padding-box;
+    border: 1px solid #D3D3D3;
+    opacity: 1;
+    letter-spacing: 0px;
+    color: #FEFEFE;
+}
+
+
+.control__center-topsection {
+    height: 54px;
+    ::ng-deep .mat-form-field-flex{
+        padding-top: 6px;
+    }   
+    .flex__row {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+
+        .flex__column-1 {
+            width: 30%;
+            ::ng-deep .mat-form-field {
+                &-wrapper {
+                    padding-bottom: 0px;
+                }
+                &-underline {
+                    bottom: 0px;
+                }
+            }
+        }
+
+        .flex__column-2 {
+            width: 70%;
+            background-color: #666666;
+            .logisitc__setup {
+                display: flex;
+                padding: 0px 20px;
+                align-items: center;
+                height: 100%;
+                label{
+                    color:#fff;
+                    font-size:18px;
+                    margin-right:10px;
+                }
+                select{
+                   border:1px solid #fff;
+                   border-radius:30px;
+                   background-color:#fff;
+                   height: 31px;
+                   width: 145px;
+                   padding: 5px 10px;
+                   outline:none !important;
+                }
+                @media(max-width:1399px){
+                    label{
+                        font-size:16px;
+                    }
+                    select{
+                        width:120px;
+                    }
+                }
+            }
+        }
+    }
+    .control__center-buttons--group {
+        text-align: left;
+        padding: 1px;
+        background-color: #f4e7ce;
+    }
+}

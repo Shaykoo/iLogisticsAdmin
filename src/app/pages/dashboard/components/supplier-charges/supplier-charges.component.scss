@@ -1,0 +1,18 @@
+.supplierCharges {
+    .status {
+        .customSelect {
+            border: 2px solid var(--620);
+            width: 110px;
+            min-width: 0;
+            font-weight: 600;
+            color: var(--620);
+        }
+        .label {
+            margin-right: 5px;
+        }
+    }
+    .tableContainer {
+        max-width: 100%;
+        overflow: auto;
+    }
+}

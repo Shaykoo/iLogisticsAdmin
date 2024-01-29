@@ -1,0 +1,137 @@
+<div class="supplierDrivers">
+    <div class="row">
+        <div class="col col-left">
+            <div class="d-flex  align-center justify-between gap-h-20 mb-15">
+                <div class="flex-1 searchbox">
+                    <div class="search d-flex align-center">
+                        <label class="label fw-500">Search:</label>
+                        <div class="search-field position-relative">
+                            <i class="fa fa-search position-absolute" aria-hidden="true"></i>
+                            <input class="search-input w-100 jagota-input" />
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-end align-center gap-h-20 ">
+                    <div class="edit cursor-pointer lh-n h-20">
+                        <i class="fa fa-pencil-square-o fs-20" aria-hidden="true"></i>
+                    </div>
+                    <button mat-raised-button class="mat-accent-custom mat-elevation-z0 rounded-20" color="accent">
+                        <mat-icon>add_circle</mat-icon> Add new driver
+                    </button>
+                </div>
+            </div>
+            <div class="box box-contract">
+                <div class="box-header text-50 d-flex align-center justify-between">
+                    <h4 class="d-flex align-center">
+                        <i class="icon-id-card-solid text-505 me-10" aria-hidden="true"></i> Drivers List
+                    </h4>
+                </div>
+                <div class="box-content">
+                    <div class="tableContainer scrollbar-xy">
+                    <table mat-table [dataSource]="contractdataSource" class="mat-elevation-z0 w-100 rounded-0" matSort
+                        (matSortChange)="announceSortChange($event)">
+                       
+                            <ng-container matColumnDef="drivername" sticky>
+                                <th mat-header-cell *matHeaderCellDef class="text-start" mat-sort-header> Driver Name
+                                </th>
+                                <td mat-cell *matCellDef="let element" class="fw-500 text-start">
+                                    {{element.drivername}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="nickname">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nick<br /> Name </th>
+                                <td mat-cell *matCellDef="let element" class="fw-500">
+                                    {{element.nickname}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="tel">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Tel </th>
+                                <td mat-cell *matCellDef="let element" class="fw-500">
+                                    {{element.tel}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="numberid">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Number ID </th>
+                                <td mat-cell *matCellDef="let element" class="fw-500">
+                                    {{element.numberid}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="startdate">
+                                <th mat-header-cell *matHeaderCellDef class="bg-77" mat-sort-header> Start Date </th>
+                                <td mat-cell *matCellDef="let element" class="fw-500">
+                                    {{element.startdate}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="activestatus">
+                                <th mat-header-cell *matHeaderCellDef class="bg-77" mat-sort-header> Active Status </th>
+                                <td mat-cell *matCellDef="let element" class="fw-500">
+                                    <select class="customSelect">
+                                        <option>Active</option>
+                                        <option>Active</option>
+                                    </select>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="lastactive">
+                                <th mat-header-cell *matHeaderCellDef class="bg-77" mat-sort-header> Last Active </th>
+                                <td mat-cell *matCellDef="let element" class="fw-500">
+                                    {{element.lastactive}} </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="contractdata"></tr>
+                            <tr mat-row *matRowDef="let row; columns: contractdata;"></tr>
+                       
+                    </table>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-right">
+            <div class="driverinfo">
+                <div class="driverinfo-header mb-15">
+                    <div class="status">
+                        <label class="label fw-500">Status:</label>
+                        <select class="customSelect">
+                            <option>Active</option>
+                            <option>Active</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="driverinfo-inner bg-76 rounded-20">
+                    <div class="img-thumbnail p-10 bg-50 mb-20">
+                        <img class="img-fluid w-100" src="../../../../../assets/userdefault.png" />
+                    </div>
+                    <div class="driverinfo-upload mb-10">
+                        <div class="card mb-10">
+                            <div class="imgdiv text-center bg-50">
+                                <div class="p-3 image">
+                                    <img class="img-fluid w-100" src="../../../../../assets/idcard.png" />
+                                </div>
+                                <div class="caption pse-5 fs-14 bg-495">ID Card</div>
+                            </div>
+                        </div>
+                        <div class="card mb-10">
+                            <div class="imgdiv text-center bg-50">
+                                <div class="p-3 image">
+
+                                </div>
+                                <div class="caption pse-5 fs-14 bg-495">House Register</div>
+                            </div>
+                        </div>
+                        <div class="card mb-10">
+                            <div class="imgdiv text-center bg-50">
+                                <div class="p-3 image">
+
+                                </div>
+                                <div class="caption pse-5 fs-14 bg-495">Contract</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex align-center gap-h-10 gap-r-10 flex-wrap">
+                        <button mat-raised-button class="mat-accent-custom mat-elevation-z0 rounded-20 h-40"
+                            color="accent">
+                            <mat-icon class="me-8">add_circle</mat-icon> Add new documents
+                        </button>
+                        <button mat-mini-fab color="accent" class="mat-elevation-z0 mat-accent-custom shadow-none">
+                            <mat-icon class="icon-trash"></mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

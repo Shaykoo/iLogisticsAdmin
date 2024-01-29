@@ -1,0 +1,43 @@
+<div class="uploadcontractModal position-relative" cdkFocusInitial>
+    <div class="uploadcontractModal-header d-flex justify-between">
+        <h4 class="fw-600">Upload Contract</h4>
+        <div class="d-inline-flex align-center gap-h-20">
+            <button mat-button class="rounded-20" mat-dialog-close>Cancel</button>
+            <button mat-raised-button class="rounded-20" color="primary">Done</button>
+        </div>
+    </div>
+    <div class="uploadcontractModal-content">
+        <div class="form-field">
+            <div class="desc">
+                <label class="control-label control-label-desc text-50 bg-306 w-100">Description</label>
+                <textarea class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-field">
+                    <div class="date position-relative">
+                        <label class="control-label text-50 bg-306 ">Start Date</label>
+                        <input class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-field">
+                    <div class="date position-relative">
+                        <label class="control-label text-50 bg-306 ">End Date</label>
+                        <input class="form-control" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-field mb-0">
+            <div class="upload bg-79 p-15 rounded-10 d-flex flex-column align-center">
+                <div class="icon">
+                    <i class="icon-flie text-280"></i>
+                  </div>
+                  <p class="mb-0 text-295">Drag and drop or<br/> upload your files</p>
+            </div>
+        </div>
+    </div>
+</div>

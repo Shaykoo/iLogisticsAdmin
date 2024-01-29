@@ -1,0 +1,202 @@
+<div class="truckSupply">
+    <div class="row">
+        <div class="col col-left">
+            <div class="d-flex justify-end align-center gap-h-20 mb-20">
+                <div class="edit cursor-pointer lh-n h-20">
+                    <i class="fa fa-pencil-square-o fs-20 fw-600" aria-hidden="true"></i>
+                </div>
+                <button mat-raised-button class="mat-accent-custom mat-elevation-z0 rounded-20" color="accent">
+                    <mat-icon>add_circle</mat-icon> Add Truck
+                </button>
+            </div>
+
+            <div class="innerRow">
+                <div class="innerRow-col">
+                    <div class="box box-contract">
+                        <div class="box-header text-50 d-flex align-center justify-between">
+                            <h4 class="d-flex align-center">
+                                <i class="icon-truck-solid text-505 me-10" aria-hidden="true"></i> Choose Truck
+                            </h4>
+                        </div>
+                        <div class="box-content">
+                            <div class="tableContainer">
+                                <table mat-table [dataSource]="chooseTruckSource" class="mat-elevation-z0 w-100">
+                                    <ng-container matColumnDef="truckid">
+                                        <th mat-header-cell *matHeaderCellDef class="text-center">
+                                            Truck ID </th>
+                                        <td mat-cell *matCellDef="let element" class="fw-500">
+                                            {{element.truckid}}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="drivername">
+                                        <th mat-header-cell *matHeaderCellDef class="text-center">
+                                            Driver Name </th>
+                                        <td mat-cell *matCellDef="let element" class="fw-500">
+                                            {{element.drivername}}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="detail">
+                                        <th mat-header-cell *matHeaderCellDef class="text-center">
+                                            Detail </th>
+                                        <td mat-cell *matCellDef="let element" class="fw-500">
+                                            {{element.detail}}
+                                        </td>
+                                    </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="chooseTruckData"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: chooseTruckData;">
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="innerRow-col">
+                    <div class="bg-76 truckStatus">
+                        <div class="status mb-10">
+                            <label class="label fw-500">Status:</label>
+                            <select class="customSelect">
+                                <option>Active</option>
+                                <option>Active</option>
+                            </select>
+                        </div>
+                        <div class="userInfo mb-10">
+                            <table class="w-100">
+                                <tbody>
+                                    <tr>
+                                        <th>รหัสรถ</th>
+                                        <td>YTP042</td>
+                                    </tr>
+                                    <tr>
+                                        <th>ประเภทรถ</th>
+                                        <td>6MF - 6 ล้อกลาง ห้องเย็น</td>
+                                    </tr>
+                                    <tr>
+                                        <th>รายละเอียด</th>
+                                        <td>6MF - 6 ล้อกลาง ห้องเย็น</td>
+                                    </tr>
+                                    <tr>
+                                        <th>ทะเบียน</th>
+                                        <td>83-2897</td>
+                                    </tr>
+                                    <tr>
+                                        <th>ชื่อผู้ขับ</th>
+                                        <td>สมชาย สมหญิง</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="fw-600">Temp S/N</th>
+                                        <td>E60000B86308K389</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="box box-attribute">
+                            <div class="box-header text-50 d-flex align-center justify-between">
+                                <h4 class="d-flex align-center">Attribute</h4>
+                            </div>
+                            <div class="box-content">
+                                <div class="tableContainer">
+                                    <table class="w-100 desct">
+                                        <thead>
+                                            <tr>
+                                                <th>Description</th>
+                                                <th>Value</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                    <div class="box-attribute-table">
+                                        <table class="w-100">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Temperature</th>
+                                                    <td>Frozen</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Dimension - Length</th>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Dimension - Height</th>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Dimension - Width</th>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Weight Capacity (KG)</th>
+                                                    <td>4500</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Wheel</th>
+                                                    <td>6</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </div>
+        <div class="col col-right">
+            <div class="driverinfo">
+                <div class="driverinfo-header mb-15">
+                    <div class="status">
+                        <label class="label fw-500">Status:</label>
+                        <select class="customSelect">
+                            <option>Active</option>
+                            <option>Active</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="driverinfo-inner bg-76 rounded-20">
+                    <div class="img-thumbnail p-10 bg-50 mb-20">
+                        <img class="img-fluid w-100" src="../../../../../assets/truck-image.png" />
+                    </div>
+                    <div class="driverinfo-upload mb-10">
+                        <div class="card mb-10">
+                            <div class="imgdiv text-center bg-50">
+                                <div class="p-3 image">
+                                    <img class="img-fluid w-100" src="../../../../../assets/idcard.png" />
+                                </div>
+                                <div class="caption pse-5 fs-14 bg-495">ID Card</div>
+                            </div>
+                        </div>
+                        <div class="card mb-10">
+                            <div class="imgdiv text-center bg-50">
+                                <div class="p-3 image">
+
+                                </div>
+                                <div class="caption pse-5 fs-14 bg-495">House Register</div>
+                            </div>
+                        </div>
+                        <div class="card mb-10">
+                            <div class="imgdiv text-center bg-50">
+                                <div class="p-3 image">
+
+                                </div>
+                                <div class="caption pse-5 fs-14 bg-495">Contract</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex align-center gap-h-10 gap-r-10 flex-wrap">
+                        <button mat-raised-button class="mat-accent-custom mat-elevation-z0 rounded-20 h-40"
+                            color="accent">
+                            <mat-icon class="me-8">add_circle</mat-icon> Add new documents
+                        </button>
+                        <button mat-mini-fab color="accent" class="mat-elevation-z0 mat-accent-custom shadow-none">
+                            <mat-icon class="icon-trash"></mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
